@@ -1,4 +1,4 @@
-package com.nina.ds;
+package com.nina.ds.tree;
 
 import java.util.ArrayList;
 import java.io.*;

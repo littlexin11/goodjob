@@ -1,4 +1,4 @@
-package com.nina.tree;
+package com.nina.ds.bst;
 
 public class BSTCreate {
 	public static void main(String[] arg){
