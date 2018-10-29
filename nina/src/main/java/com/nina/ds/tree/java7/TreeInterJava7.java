@@ -1,4 +1,4 @@
-package com.nina.ds.tree;
+package com.nina.ds.tree.java7;
 
 import java.util.ArrayList;
 import java.io.*;
@@ -6,15 +6,6 @@ import java.util.*;
 import java.text.*;
 import java.math.*;
 import java.util.regex.*;
-
-import com.nina.ds.tree.Color;
-import com.nina.ds.tree.FancyVisitor;
-import com.nina.ds.tree.ProductOfRedNodesVisitor;
-import com.nina.ds.tree.SumInLeavesVisitor;
-import com.nina.ds.tree.Tree;
-import com.nina.ds.tree.TreeLeaf;
-import com.nina.ds.tree.TreeNode;
-import com.nina.ds.tree.TreeVis;
 
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -105,10 +96,8 @@ class FancyVisitor extends TreeVis {
 }
 
 
-public class TreeInter {
-	HashMap<Integer, ArrayList<Integer>> edgeMap=new HashMap<Integer, ArrayList<Integer>>();
-	String[] values;
-	String[] colors;
+public class TreeInterJava7 {
+
 	
 	public static Tree solve() {
 		
@@ -133,10 +122,12 @@ public class TreeInter {
         
         
         //read data
-       
+        ArrayList<Integer[]> positionList = new ArrayList<Integer[]>();
+        
         for(int i=0; i<numberOfNode; i++){
         	
         	try {
+        	System.out.println("i="+i);
         	
         	FutureTask<String> task = new FutureTask<>(() -> {
                 return scanner.nextLine();
@@ -149,19 +140,15 @@ public class TreeInter {
 			
 				line = task.get(5, TimeUnit.SECONDS);
 			
-				System.out.println("line="+line);
-	        	
+
         	
         	String[] positionS = line.split(" ");
         	int parentPosition = Integer.valueOf(positionS[0])-1;
         	int selfPosition = Integer.valueOf(positionS[1])-1;
+        	Integer[] postion = {parentPosition, selfPosition};
+        	positionList.add(postion);
+        	parentFlags[parentPosition] = true;
         	
-        	ArrayList<Integer> edgeList = edgeMap.get(parentPosition);
-        	if(edgeList ==null)
-        		edgeList = new ArrayList<Integer>();
-        	
-        	edgeList.add(selfPosition);
-        	edgeMap.put(parentPosition, edgeList);
         	} catch (InterruptedException | ExecutionException | TimeoutException e) {
 				break;
 			}
@@ -184,37 +171,33 @@ public class TreeInter {
         
         treeArray.add(root);
         
-        ArrayList<Integer> rootEdge = edgeMap.get(0);
-        
         //0 red, 1 green
         
-        
-        scanner.close();
-		return root;	
-    }
-	
-	public static void processEdge(TreeNode parent,  HashMap<Integer, ArrayList<Integer>> edgeMap){
-		for(Integer childPos: edges){
+        for(int i=0; i<positionList.size(); i++) {
+        	Integer[] postion = positionList.get(i);
+        	
         	Tree node = null;
         	
-        	if(edgeMap.get(childPos)!=null){
-        		//createnode
-        		node = new TreeLeaf(Integer.valueOf(values[childPos])
-            			, colors[childPos].equals("0")?Color.RED:Color.GREEN
-                    			, root.getDepth()+1);
-        		create
-        		
-        	}{
-        		//create Leaf
-        		node = new TreeNode(Integer.valueOf(values[postion[1]])
+        	if(!parentFlags[postion[1]]) {
+        		node = new TreeLeaf(Integer.valueOf(values[postion[1]])
             			, colors[postion[1]].equals("0")?Color.RED:Color.GREEN
-            			, root.getDepth()+1);
+                    			, treeArray.get(postion[0]).getDepth()+1);
+        	}else{
+        		node = new TreeNode(Integer.valueOf(values[postion[1]])
+        			, colors[postion[1]].equals("0")?Color.RED:Color.GREEN
+        			, treeArray.get(postion[0]).getDepth()+1);
         	}
         	
-        	((TreeNode)root).addChild(node);
+        	treeArray.add(node);
+            
+        	
+        	((TreeNode)treeArray.get(postion[0])).addChild(node);
         	
         } 		
-	}
+        scanner.close();
+		return root;
+		
+    }
 
     public static void main(String[] args) {
       	Tree root = solve();
