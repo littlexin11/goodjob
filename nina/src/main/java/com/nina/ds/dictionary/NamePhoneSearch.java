@@ -164,7 +164,7 @@ public class NamePhoneSearch {
  { 
      Trie trie = new Trie(); 
 
-     String contacts [] = {"gforgeeks", "geeksquiz"}; 
+     String contacts [] = {"gforgeek", "gforgeeks", "geeksquiz", "gforgeeksmore"}; 
 
      trie.insertIntoTrie(contacts); 
 

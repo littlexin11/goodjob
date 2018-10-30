@@ -106,11 +106,11 @@ class FancyVisitor extends TreeVis {
 
 
 public class TreeInter {
-	HashMap<Integer, ArrayList<Integer>> edgeMap=new HashMap<Integer, ArrayList<Integer>>();
 	String[] values;
 	String[] colors;
 	
-	public static Tree solve() {
+	public  static Tree solve() {
+		HashMap<Integer, ArrayList<Integer>> edgeMap=new HashMap<Integer, ArrayList<Integer>>();
 		
         Scanner scanner = new Scanner(System.in);
         
@@ -193,7 +193,7 @@ public class TreeInter {
 		return root;	
     }
 	
-	public static void processEdge(TreeNode parent,  HashMap<Integer, ArrayList<Integer>> edgeMap){
+	/*public static void processEdge(TreeNode parent,  HashMap<Integer, ArrayList<Integer>> edgeMap){
 		for(Integer childPos: edges){
         	Tree node = null;
         	
@@ -214,7 +214,7 @@ public class TreeInter {
         	((TreeNode)root).addChild(node);
         	
         } 		
-	}
+	}*/
 
     public static void main(String[] args) {
       	Tree root = solve();

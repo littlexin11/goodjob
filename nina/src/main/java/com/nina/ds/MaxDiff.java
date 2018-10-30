@@ -23,8 +23,8 @@ public class MaxDiff {
 	}
 	
 	public static void main(String[] args){
-		//Integer[]  intArr={2, 3, 10, 6, 4, 8, 1};
-		Integer[]  intArr={7, 9, 5, 6, 3, 2};
+		Integer[]  intArr={2, 3, 10, 6, 4, 8, 1};
+		//Integer[]  intArr={7, 9, 5, 6, 3, 2};
 		
 		System.out.println(findMaxDiff(intArr));
 	}
